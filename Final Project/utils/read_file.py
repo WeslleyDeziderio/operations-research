@@ -1,18 +1,22 @@
+import sys
+
 def read_instance(instance_path):
     try:     
         with open(instance_path) as file:
-            list_ = [list(map(int, row.split())) for row in file]
-            num_vars = list_[0][0]
-            num_constraints = list_[0][1]
-            list_.pop(0)
+            num_vars, num_constraints = map(int, file.readline().split())
+            z = [float(c) for c in file.readline().split()]
 
-            coefficients = list_[0]
-            list_.pop(0)
+            constraints = []
+            for _ in range(num_constraints):
+                line = file.readline()
+                constraints.append([float(c) for c in line.split()])
 
-            constraints = list_
+            print("max", z)
+            print("s.a:", constraints)
+            print("")
 
-            return num_vars, num_constraints, coefficients, constraints
-        
+            return (num_vars, num_constraints, z, constraints)
+                    
     except FileNotFoundError:
         print(f"Error: File '{instance_path}' not found.")
     except (ValueError, IndexError):
