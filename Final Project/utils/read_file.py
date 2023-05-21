@@ -1,4 +1,10 @@
 import sys
+class Instance:
+    def __init__(self, num_vars, num_constraints, z, constraints):
+        self.num_vars = num_vars
+        self.num_constraints = num_constraints
+        self.z = z
+        self.constraints = constraints
 
 def read_instance(instance_path):
     try:     
@@ -10,11 +16,6 @@ def read_instance(instance_path):
             for _ in range(num_constraints):
                 line = file.readline()
                 constraints.append([float(c) for c in line.split()])
-
-            print("max", z)
-            print("s.a:", constraints)
-            print("")
-
             return (num_vars, num_constraints, z, constraints)
                     
     except FileNotFoundError:
