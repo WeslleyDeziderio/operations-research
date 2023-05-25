@@ -6,17 +6,25 @@ class Instance:
         self.z = z
         self.constraints = constraints
 
+    def print_data(self):
+        print("Instance:")
+        print("Variables:", self.num_vars)
+        print("z:", self.z)
+        print("Constraints:")
+        for constraint in self.constraints:
+            print(constraint)
+
 def read_instance(instance_path):
     try:     
         with open(instance_path) as file:
             num_vars, num_constraints = map(int, file.readline().split())
-            z = [float(c) for c in file.readline().split()]
+            z = [int(c) for c in file.readline().split()]
 
             constraints = []
             for _ in range(num_constraints):
                 line = file.readline()
-                constraints.append([float(c) for c in line.split()])
-            return (num_vars, num_constraints, z, constraints)
+                constraints.append([int(c) for c in line.split()])
+            return Instance(num_vars, num_constraints, z, constraints)
                     
     except FileNotFoundError:
         print(f"Error: File '{instance_path}' not found.")
