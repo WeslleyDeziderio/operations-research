@@ -2,10 +2,12 @@ from mip import Model, xsum, BINARY, MAXIMIZE, CBC, OptimizationStatus
 from utils.read_file import *
 
 def create_model():
-    model = Model(sense=MAXIMIZE, solver_name=CBC)
-    x = [model.add_var(var_type=BINARY, name=f"x_{i}") for i in range (read_instance(sys.argv[1])[0])]
-    model.objective = xsum(x[i] * read_instance(sys.argv[1])[2][i] for i in range(read_instance(sys.argv[1])[0]))
+    instance = read_instance(sys.argv[1])
+    instance.print_instance()
 
-    print("max:", model.objective)
-    print(read_instance(sys.argv[1])[3])
-    # model += xsum(x[j] * read_instance(sys.argv[1])[1][j] for j in range(read_instance(sys.argv[1])[0])) <= read_instance(sys.argv[1])[3]
+    model = Model(sense=MAXIMIZE, solver_name=CBC)
+    x = [model.add_var(var_type=BINARY) for i in range(instance.num_vars)]
+    model.objective = xsum(instance.objective_function[i] * x[i] for i in range(instance.num_vars))
+
+    for i in instance.constraints:
+        model += xsum(i[j] * x[j] for j in range(instance.num_vars)) <= i[-1]
