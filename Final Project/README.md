@@ -1,1 +1,1 @@
-<h1>Operation Research Final Project | Branch and Bound Algorithm</h1>
+<h1>Branch and Bound Algorithm</h1>
