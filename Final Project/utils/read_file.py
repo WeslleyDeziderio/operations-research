@@ -19,12 +19,12 @@ def read_instance(instance_path):
     try:     
         with open(instance_path) as file:
             num_vars, num_constraints = map(int, file.readline().split())
-            objective_function = [int(c) for c in file.readline().split()]
+            objective_function = [float(c) for c in file.readline().split()]
 
             constraints = []
             for _ in range(num_constraints):
                 line = file.readline()
-                constraints.append([int(c) for c in line.split()])
+                constraints.append([float(c) for c in line.split()])
             return Instance(num_vars, num_constraints, objective_function, constraints)
                     
     except FileNotFoundError:
