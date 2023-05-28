@@ -32,7 +32,7 @@ Sujeito a:
 $$
 3x_1 + 5x_2 + 2x_3 \leq 6 \\
 4x_1 + 4x_2 + 4x_3 \leq 7 \\
-x_1 , x_2, x_3 \in \left\{0, 1 \right\}
+x_1 , x_2, x_3 \in \lbrace{0, 1}\rbrace
 $$
 
 <p><strong>Formato do arquivo</strong></p> <br>
