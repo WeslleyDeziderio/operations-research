@@ -23,23 +23,21 @@ abertos.</li>
 <p><strong>Formato do arquivo.</strong>
 O formato esperado para o arquivo será ilustrado a partir do problema abaixo:</p> <br>
 
-$
-    Max \space 5x_1 + 10x_2 + 8x_3
-$
+$Max \space 5x_1 + 10x_2 + 8x_3$
 
 Sujeito a:
 
 $$
-3x_1 + 5x_2 + 2x_3 \leq 6 \\
-4x_1 + 4x_2 + 4x_3 \leq 7 \\
+3x_1 + 5x_2 + 2x_3 \leq 6\newline
+4x_1 + 4x_2 + 4x_3 \leq 7\newline
 x_1 , x_2, x_3 \in \lbrace{0, 1}\rbrace
 $$
 
 <p><strong>Formato do arquivo</strong></p> <br>
 
 $$
-3 \space 2 \\ 
-5 \space 10 \space 8 \\
-3 \space 5 \space 2 \space 6 \\
-4\space 4\space 4\space 7 \\
+3 \space 2\newline
+5 \space 10 \space 8 \newline
+3 \space 5 \space 2 \space 6 \newline
+4\space 4\space 4\space 7 \newline
 $$
