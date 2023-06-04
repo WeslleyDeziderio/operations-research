@@ -10,8 +10,8 @@ distance_to_node = lambda x: abs(x-BRANCHING_RULE)
 is_integer = lambda x: x == 0 or x == 1
 
 def solve_model(model):
-    _ = model.optimize()
     model.verbose = 0
+    _ = model.optimize()
 
 def branchAndBound(nodes, model, dual_limit, primal_limit):
     queue = deque(nodes)
