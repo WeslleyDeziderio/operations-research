@@ -6,7 +6,7 @@ nodes = [model]
 dual_limit = np.inf
 primal_limit = -np.inf
 
-model, primal = branchAndBound(nodes, model, dual_limit, primal_limit)
+model, primal = branch_and_bound(nodes, model, dual_limit, primal_limit)
 
 print("Z =", model.objective_value)
 print("Solution:")
