@@ -41,3 +41,7 @@ $$
 3 \space 5 \space 2 \space 6 \newline
 4\space 4\space 4\space 7 \newline
 $$
+
+<br>
+
+<strong>Executando o projeto:</strong> `python3 main.py instances/<instancia_desejada.txt>`
