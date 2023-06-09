@@ -11,7 +11,8 @@ def create_model():
 
     for i in instance.constraints:
         model += xsum(i[j] * x[j] for j in range(instance.num_vars)) <= i[-1]
-
+    
+    model.relax()
     model.write("model.lp")
 
     return model
