@@ -1,42 +1,47 @@
 
 from utils.create_model import *
-from copy import deepcopy
 from collections import deque
 
 import numpy as np
 
 BRANCHING_RULE = 0.5
-distance_to_node = lambda x: abs(x-BRANCHING_RULE)
 is_integer = lambda x: x == 0 or x == 1
+
+def nearest_index(lst, K):
+    return lst.index(min(lst, key = lambda x: abs(x - K)))
 
 def solve_model(model):
     model.verbose = 0
     _ = model.optimize()
 
-def branchAndBound(nodes, model, dual_limit, primal_limit):
+def branch_and_bound(nodes, model, dual_limit, primal_limit):
     queue = deque(nodes)
  
-    while len(queue) != 0:
-        _  = queue.popleft()
-        node = model.copy()
+    while queue:
+        node = queue.popleft()
         try:
             solve_model(node)
             dual_limit = min(dual_limit, node.objective_value)
         except:
             continue
 
-        values_relax = [v.x for v in node.vars]
-        is_x_integer = [v.x for v in node.vars if not is_integer(v.x)]
+        var_values = [v.x for v in node.vars]
+        continuous_vars = [v.x for v in node.vars if not is_integer(v.x) and not is_integer(v.x)]
 
-        if len(is_x_integer) == 0:
+        if not continuous_vars:
             if node.objective_value > primal_limit:
                 primal_limit = node.objective_value
                 model = node
             continue
         
-        index = distance_to_node(values_relax, BRANCHING_RULE)
-        queue = [node.copy() + (node.vars[index] == 0) for node in nodes]
-        queue = [node.copy() + (node.vars[index] == 1) for node in nodes]
+        index = nearest_index(var_values, BRANCHING_RULE)
+        left_node = node.copy()
+        left_node += left_node.vars[index] == 0
+        queue.append(left_node)
+
+        right_node = node.copy()
+        right_node += right_node.vars[index] == 1
+        queue.append(right_node)
 
     return model, primal_limit
     
